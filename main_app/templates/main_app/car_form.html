@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if object %}
+  <h1>Edit <span class= "teal-text">{{object.name}}</span></h1>
+{% else %}
+  <h1>Add a car</h1>
+{% endif %}
+
+<!-- if the details not captured from the form(image) -->
+#to upload files, we need to add enctype="multipart/form-data" to the form tag
+  <form action="" method="post" enctype="multipart/form-data">
+    <!-- // This is a CSRF token for security -->
+    {% csrf_token %} 
+    <table>
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit!" class="btn">
+  </form>
+{% endblock %}

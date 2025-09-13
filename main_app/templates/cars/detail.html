@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Car Details</h1>
+
+  <div class="card">
+    <div class="card-content">
+        <div class="flex-container">
+            <div>
+              <span class="card-title">{{ car.name }}</span>
+              <p>Model: {{ car.model }}</p>
+              <p>Description: {{ car.year }}</p>
+
+            </div>
+            <div>
+                {% load static %}
+                <img src="{% static car.image|cut:'main_app/static/' %}" width="100px" height="100px" alt="Car Image">
+            </div>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'cars_update' car.id %}">Edit</a>
+        <a href="{% url 'cars_delete' car.id %}">Delete</a>
+    </div>
+    </div>
+  </div>
+ <div>
+   <form action="{% url 'add_trip' car.id %}" method="post">
+     {% csrf_token %}
+     {{ trip_form.as_p }}
+     <input type="submit" class="btn" value="Add Trip">
+    </form>
+
+     <div>
+   <!-- <form action="" method="post">
+     {% csrf_token %}
+     {{ toy_form.as_p }}
+     <input type="submit" class="btn" value="Add Toy"> -->
+
+    </form>
+    <div>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Trip</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for trip in car.trip_set.all %}
+          <tr>
+            <td>{{ trip.date_time }}</td>
+            <td>{{ trip.destination }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ car.name }}'s Drivers</h3>
+    {% if car.drivers.count %}
+      {% for driver in car.drivers.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              A <span style="color: {{ driver.name }}">{{ driver.name }}</span> {{ driver.name }}
+            </span>
+            <form action="{% url 'unassoc_driver' car.id driver.id %}" method="post">
+              <p>Image: <img src="{% static driver.image|cut:'main_app/static/' %}" width="20px" height="20px" alt="Driver Image"></p>
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Drivers :( </h5>
+    {% endif %}
+    
+  </div>
+  <div class="col s6">
+  <h3>Avaliable Drivers</h3>
+        {% if car.drivers.count == 0 %}
+    {% for driver in drivers.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+            A <span style="color: {{ driver.name }}">{{ driver.name }}</span> {{ driver.name }}
+          </span>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'assoc_driver' car.id driver.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn">Add</button>
+          </form>
+
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h5>You can only pick 1 driver at a time, remove the current select another</h5>
+  {% endif %}
+</div>
+</div>
+  <script>
+  var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+  {/* // add additional JS to initialize select below */}
+  let selectEl = document.getElementById('id_destination');
+  M.FormSelect.init(selectEl);
+</script>
+{% endblock %}

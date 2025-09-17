@@ -1,7 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from django.db import models
+from django.contrib.auth.models import User
 # Create your models here.
 TRIPS = (
     ('M', 'Morning'),
@@ -9,6 +10,25 @@ TRIPS = (
     ('E', 'Evening'),
     ('N', 'Night'),
 )
+
+ROLES = [
+    ('A', 'Admin'),
+    ('D', 'Driver'),
+    ('U', 'User'),
+]
+
+
+
+# Extending User Model Using a One-To-One Link
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=10, choices=ROLES)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    bio = models.TextField()
+
+    def __str__(self):
+        return self.user.username
+
 
 class Driver(models.Model):
     name = models.CharField(max_length=50)

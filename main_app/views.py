@@ -10,6 +10,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin  #to protect classes
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
 
 class CarCreate(LoginRequiredMixin, CreateView):
     model = Car

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from .views import profile
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -25,6 +26,10 @@ urlpatterns = [
     path('cars/<int:car_id>/unassoc_driver/<int:driver_id>/', views.unassoc_driver, name='unassoc_driver'),
 #signup route
     path('accounts/signup/', views.signup, name='signup'),
+    
+    # Add this
+    path('profile/', profile, name='users-profile'),
+
 
 ]
 

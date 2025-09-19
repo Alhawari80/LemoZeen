@@ -23,17 +23,10 @@
     </div>
   </div>
  <div>
-   <form action="{% url 'add_trip' car.id %}" method="post">
-     {% csrf_token %}
-     {{ trip_form.as_p }}
-     <input type="submit" class="btn" value="Add Trip">
-    </form>
 
+        <a class="btn" href="{% url 'book_trip' car.id %}">Book this car</a>
      <div>
-   <!-- <form action="" method="post">
-     {% csrf_token %}
-     {{ toy_form.as_p }}
-     <input type="submit" class="btn" value="Add Toy"> -->
+
 
     </form>
     <div>
@@ -45,12 +38,12 @@
           </tr>
       </thead>
       <tbody>
-        {% for trip in car.trip_set.all %}
+      
           <tr>
             <td>{{ trip.date_time }}</td>
             <td>{{ trip.destination }}</td>
           </tr>
-        {% endfor %}
+      
       </tbody>
     </table>
   </div>

@@ -21,8 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # settings.py
 import os
+from pathlib import Path
+GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
-GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY", "your-api-key-here")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -130,6 +131,10 @@ STATIC_URL = 'static/'
 
 LOGIN_REDIRECT_URL = '/cars/'
 LOGOUT_REDIRECT_URL = '/'
+
+# STATIC_ROOT = 'static/'
+# STATICFILES_DIRS = ['static/']
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

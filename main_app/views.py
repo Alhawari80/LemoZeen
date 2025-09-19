@@ -13,6 +13,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin  #to protect classes
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
+from decimal import Decimal
+from django.shortcuts import render, get_object_or_404, redirect
+from django.conf import settings
+from django.views.decorators.http import require_POST
+from .models import Car, Driver, Trip  
+
 
 @login_required
 def profile(request):
@@ -61,16 +67,70 @@ def cars_detail(request, car_id):
                 })
 
 
-def add_trip(request, car_id):
-    form = TripForm(request.POST)
-    cat = Car.objects.get(id=car_id)
+# def add_trip(request, car_id):
+#     form = TripForm(request.POST)
+#     cat = Car.objects.get(id=car_id)
     
-    # feeding_form = FeedingForm(request.POST or None)
-    if form.is_valid():
-        new_trip = form.save(commit=False)
-        new_trip.car_id = car_id
-        new_trip.save()
-    return redirect('detail', car_id=car_id)
+#     # feeding_form = FeedingForm(request.POST or None)
+#     if form.is_valid():
+#         new_trip = form.save(commit=False)
+#         new_trip.car_id = car_id
+#         new_trip.save()
+#     return redirect('detail', car_id=car_id)
+
+def book_trip(request, car_id):
+    car = get_object_or_404(Car, pk=car_id)
+    drivers = Driver.objects.all()  # or filter by available
+    return render(request, 'main_app/book_trip.html', {
+        'car': car,
+        'drivers': drivers,
+        'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
+    })
+
+@require_POST
+def create_trip(request):
+    # Basic server-side payload validation:
+    car = get_object_or_404(Car, pk=request.POST.get('car_id'))
+    driver_id = request.POST.get('driver_id') or None
+    driver = Driver.objects.get(pk=driver_id) if driver_id else None
+
+    origin_address = request.POST.get('origin_address', '')
+    destination_address = request.POST.get('destination_address', '')
+    try:
+        origin_lat = Decimal(request.POST.get('origin_lat'))
+        origin_lng = Decimal(request.POST.get('origin_lng'))
+        destination_lat = Decimal(request.POST.get('destination_lat'))
+        destination_lng = Decimal(request.POST.get('destination_lng'))
+    except Exception:
+        # handle bad input
+        return redirect('main_app:book_trip', car_id=car.id)
+
+    distance_text = request.POST.get('distance_text', '')
+    duration_text = request.POST.get('duration_text', '')
+    route_polyline = request.POST.get('route_polyline', '')
+
+    trip = Trip.objects.create(
+        user = request.user if request.user.is_authenticated else None,
+        car = car,
+        driver = driver,
+        origin_address = origin_address,
+        origin_lat = origin_lat,
+        origin_lng = origin_lng,
+        destination_address = destination_address,
+        destination_lat = destination_lat,
+        destination_lng = destination_lng,
+        distance_text = distance_text,
+        duration_text = duration_text,
+        route_polyline = route_polyline,
+    )
+    return redirect('main_app:trip_detail', trip_id=trip.id)
+
+def trip_detail(request, trip_id):
+    trip = get_object_or_404(Trip, pk=trip_id)
+    return render(request, 'main_app/trip_detail.html', {
+        'trip': trip,
+        'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
+    })
 
 # CBV's for Drivers Model
 class DriverCreate(LoginRequiredMixin, CreateView):

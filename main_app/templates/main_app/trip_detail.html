@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h3>Trip {{ trip.id }}</h3>
+<p>{{ trip.origin_address }} → {{ trip.destination_address }}</p>
+<p>Distance: {{ trip.distance_text }} • Duration: {{ trip.duration_text }}</p>
+
+<form>
+  <!-- display map only; no submission -->
+  <div id="map" style="width:100%; height:480px; max-width:900px;"></div>
+</form>
+
+<script src="{% static 'js/map.js' %}"></script>
+<script>
+  // make trip coordinates available to the JS
+  window._savedTrip = {
+    origin_lat: "{{ trip.origin_lat }}",
+    origin_lng: "{{ trip.origin_lng }}",
+    destination_lat: "{{ trip.destination_lat }}",
+    destination_lng: "{{ trip.destination_lng }}"
+  };
+</script>
+<script src="{% static 'js/map.js' %}" data-google-maps-api-key="{{ google_maps_api_key }}"></script>
+{% endblock %}
+

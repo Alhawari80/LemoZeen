@@ -8,7 +8,9 @@
         <span class="card-title">{{ driver.name }}</span>
         <!-- <p>License Number: {{ driver.license_number }}</p> -->
 {% load static %}
-        <img src="{% static driver.image|cut:'main_app/static/' %}" width="300px" height="300px" alt="Driver Image">  
+        <img src="{% static driver.image|cut:'main_app/static/' %}" width="300px" height="300px" alt="Driver Image"> 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> 
       </div>
       <div class="card-action">
         <a href="{% url 'drivers_update' driver.id %}">Edit</a>

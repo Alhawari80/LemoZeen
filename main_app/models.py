@@ -3,6 +3,11 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import User
+
+#add a Trip model
+from django.db import models
+from django.conf import settings
+from decimal import Decimal
 # Create your models here.
 TRIPS = (
     ('M', 'Morning'),
@@ -79,13 +84,24 @@ class Car(models.Model):
 
 
 class Trip(models.Model):
-    date_time = models.DateTimeField()
-    car = models.ForeignKey(Car,on_delete=models.CASCADE)
-    location = models.CharField(max_length=100)
-    destination = models.CharField(max_length=100)
-    notes = models.TextField(max_length=250)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    car = models.ForeignKey('Car', on_delete=models.CASCADE)               # adjust string if Car in another app
+    driver = models.ForeignKey('Driver', on_delete=models.SET_NULL, null=True, blank=True)
+    origin_address = models.CharField(max_length=255)
+    origin_lat = models.DecimalField(max_digits=9, decimal_places=6)
+    origin_lng = models.DecimalField(max_digits=9, decimal_places=6)
+    destination_address = models.CharField(max_length=255)
+    destination_lat = models.DecimalField(max_digits=9, decimal_places=6)
+    destination_lng = models.DecimalField(max_digits=9, decimal_places=6)
+    distance_text = models.CharField(max_length=50, blank=True)
+    duration_text = models.CharField(max_length=50, blank=True)
+    route_polyline = models.TextField(blank=True)     # optional for storing overview_polyline
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Trip {self.id} {self.origin_address} → {self.destination_address}"
+    
     # driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-
     def __str__(self):
         return f"{self.car.name} {self.get_car_display()} on {self.date}"
     

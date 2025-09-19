@@ -6,7 +6,7 @@ from .models import Trip , Driver
 class TripForm(ModelForm):
     class Meta:
         model = Trip
-        fields = ['destination', 'date_time','location','notes']
+        fields = "__all__" 
         widgets = {
             'date_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }

@@ -11,8 +11,12 @@ urlpatterns = [
     path('cars/create', views.CarCreate.as_view(), name='cars_create'),
     path('cars/<int:pk>/update', views.CarUpdate.as_view(), name='cars_update'),
     path('cars/<int:pk>/delete', views.CarDelete.as_view(), name='cars_delete'),
-    path('cars/<int:car_id>/add_trip', views.add_trip, name='add_trip'),
-    # path('cars/<int:car_id>/add_driver/', views.add_driver, name='add_driver'),
+    # path('cars/<int:car_id>/add_trip', views.add_trip, name='add_trip'),
+
+#add endpoints for booking & trip detail    
+    path('cars/<int:car_id>/book/', views.book_trip, name='book_trip'),
+    path('trips/create/', views.create_trip, name='create_trip'),
+    path('trips/<int:trip_id>/', views.trip_detail, name='trip_detail'),
 
 # CBV's fpt drivers Model
     path('drivers/', views.DriverList.as_view(), name='drivers_index'),
@@ -29,7 +33,7 @@ urlpatterns = [
     
     # Add this
     path('profile/', profile, name='users-profile'),
-
+    
 
 ]
 

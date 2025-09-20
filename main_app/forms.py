@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 
-from .models import Trip , Driver
+from .models import Trip , Driver ,Car , Profile
 
 class TripForm(ModelForm):
     class Meta:

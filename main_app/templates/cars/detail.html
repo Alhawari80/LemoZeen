@@ -24,7 +24,7 @@
   </div>
  <div>
 
-        <a class="btn" href="{% url 'book_trip' car.id %}">Book this car</a>
+  <a class="btn btn-danger" href="{% url 'book_trip' car.id %}">Book this car</a>
      <div>
 
 
@@ -61,7 +61,7 @@
             <form action="{% url 'unassoc_driver' car.id driver.id %}" method="post">
               <p>Image: <img src="{% static driver.image|cut:'main_app/static/' %}" width="20px" height="20px" alt="Driver Image"></p>
               {% csrf_token %}
-              <button type="submit" class="btn">Remove</button>
+              <button type="submit" class="btn-danger">Remove</button>
             </form>
           </div>
         </div>

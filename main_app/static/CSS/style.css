@@ -1,4 +1,4 @@
-body {
+/* body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -21,7 +21,63 @@ body {
     align-content: center;
   } */
   
-.flex-container {
+/* .flex-container {
   display: flex;
   justify-content: space-between;
+}  */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 480px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.4;
 }
+        .cookie-notice {
+            background-color: #f4f4f4;
+            border-top: 1px solid #ddd;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            color: #333;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-sizing: border-box;
+        }
+        .cookie-notice button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            margin-left: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        a.opt-out-link {
+            color: #0000ee;
+            text-decoration: underline;
+            cursor: pointer;
+        }

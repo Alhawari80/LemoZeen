@@ -1,7 +1,7 @@
 from urllib import request
 from django.shortcuts import redirect, render
 # from django.http import HttpResponse
-from .models import Car, Driver, Trip
+from .models import Car, Driver, Trip 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .forms import TripForm
@@ -69,7 +69,8 @@ def cars_detail(request, car_id):
 
 # def add_trip(request, car_id):
 #     form = TripForm(request.POST)
-#     cat = Car.objects.get(id=car_id)
+#     car = Car.objects.get(id=car_id)
+#     user = user.object.get(id=user_id)
     
 #     # feeding_form = FeedingForm(request.POST or None)
 #     if form.is_valid():
@@ -93,7 +94,6 @@ def create_trip(request):
     car = get_object_or_404(Car, pk=request.POST.get('car_id'))
     driver_id = request.POST.get('driver_id') or None
     driver = Driver.objects.get(pk=driver_id) if driver_id else None
-
     origin_address = request.POST.get('origin_address', '')
     destination_address = request.POST.get('destination_address', '')
     try:

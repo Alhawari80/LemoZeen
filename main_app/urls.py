@@ -17,6 +17,9 @@ urlpatterns = [
     path('cars/<int:car_id>/book/', views.book_trip, name='book_trip'),
     path('trips/create/', views.create_trip, name='create_trip'),
     path('trips/<int:trip_id>/', views.trip_detail, name='trip_detail'),
+    
+    path("trip/create/", views.create_trip, name="create_trip"),
+    path("trip/<int:pk>/", views.trip_detail, name="trip_detail"), 
 
 # CBV's fpt drivers Model
     path('drivers/', views.DriverList.as_view(), name='drivers_index'),

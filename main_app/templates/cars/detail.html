@@ -13,7 +13,8 @@
             </div>
             <div>
                 {% load static %}
-                <img src="{% static car.image|cut:'main_app/static/' %}" width="100px" height="100px" alt="Car Image">
+                <img src="{% static car.image|cut:'main_app/static/' %}" 
+                width="120px" height="120px" alt="Car Image">
             </div>
       </div>
       <div class="card-action">
@@ -22,10 +23,10 @@
     </div>
     </div>
   </div>
- <div>
+  <div>
 
   <a class="btn btn-danger" href="{% url 'book_trip' car.id %}">Book this car</a>
-     <div>
+  <div>
 
 
     </form>
@@ -59,7 +60,8 @@
               A <span style="color: {{ driver.name }}">{{ driver.name }}</span> {{ driver.name }}
             </span>
             <form action="{% url 'unassoc_driver' car.id driver.id %}" method="post">
-              <p>Image: <img src="{% static driver.image|cut:'main_app/static/' %}" width="20px" height="20px" alt="Driver Image"></p>
+              <p>Image: <img src="{% static driver.image|cut:'main_app/static/' %}" 
+                width="20px" height="20px" alt="Driver Image"></p>
               {% csrf_token %}
               <button type="submit" class="btn-danger">Remove</button>
             </form>
@@ -84,7 +86,7 @@
         <div class="card-action">
           <form action="{% url 'assoc_driver' car.id driver.id %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn">Add</button>
+            <button type="submit" class="btn-danger">Add</button>
           </form>
 
         </div>

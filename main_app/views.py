@@ -67,17 +67,17 @@ def cars_detail(request, car_id):
                 })
 
 
-# def add_trip(request, car_id):
-#     form = TripForm(request.POST)
-#     car = Car.objects.get(id=car_id)
-#     user = user.object.get(id=user_id)
+def add_trip(request, car_id):
+    form = TripForm(request.POST)
+    car = Car.objects.get(id=car_id)
+    user = user.object.get(id=user_id)
     
-#     # feeding_form = FeedingForm(request.POST or None)
-#     if form.is_valid():
-#         new_trip = form.save(commit=False)
-#         new_trip.car_id = car_id
-#         new_trip.save()
-#     return redirect('detail', car_id=car_id)
+
+    if form.is_valid():
+        new_trip = form.save(commit=False)
+        new_trip.car_id = car_id
+        new_trip.save()
+    return redirect('detail', car_id=car_id)
 
 def book_trip(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
@@ -103,7 +103,7 @@ def create_trip(request):
         destination_lng = Decimal(request.POST.get('destination_lng'))
     except Exception:
         # handle bad input
-        return redirect('main_app:book_trip', car_id=car.id)
+        return redirect('book_trip', car_id=car.id)
 
     distance_text = request.POST.get('distance_text', '')
     duration_text = request.POST.get('duration_text', '')
@@ -123,7 +123,7 @@ def create_trip(request):
         duration_text = duration_text,
         route_polyline = route_polyline,
     )
-    return redirect('main_app:trip_detail', trip_id=trip.id)
+    return redirect('trip_detail', trip_id=trip.id)
 
 def trip_detail(request, trip_id):
     trip = get_object_or_404(Trip, pk=trip_id)

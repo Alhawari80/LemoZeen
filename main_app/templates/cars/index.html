@@ -11,15 +11,11 @@
               <span class="card-title">{{ car.name }}</span>
               <!-- <p>Model: {{ car.model }}</p> -->
               <p>Plate Number: {{ car.plate_number }}</p>
-              <!-- {% if car.age > 0 %}
-                <p>Age: {{ car.age }}</p>
-              {% else %}
-                <p>Age: Kitten</p>
-              {% endif %} -->
             </div>
             <div>
                 {% load static %}
-                <img src="{% static car.image|cut:'main_app/static/' %}" width="100px" height="100px" alt="Car Image">
+                <img src="{% static car.image|cut:'main_app/static/' %}" 
+                width="100px" height="100px" alt="Car Image">
             </div>
       </div>
     </div>

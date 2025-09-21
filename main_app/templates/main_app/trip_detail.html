@@ -4,24 +4,36 @@
 {% block content %}
 <h3>Trip {{ trip.id }}</h3>
 <p>{{ trip.origin_address }} → {{ trip.destination_address }}</p>
+
 <p>Distance: {{ trip.distance_text }} • Duration: {{ trip.duration_text }}</p>
 
-<form>
-  <!-- display map only; no submission -->
-<div class="flex-container">
-  <div id="map" style="width:100%; height:480px; max-width:900px;"></div>
-</form>
+<div style="display: flex; flex-wrap: wrap;">
+    <div class="card" style="flex: 1;">
+        <div id="map" style="width:100%; height:480px; max-width:900px;"></div>
+
+    </div>
+    <div class="card" style="flex: 1; background-color: gray; max-width: 400px;">
+        <div style="margin-top: 20px;">
+            <p>{{ trip.driver.name }}</p>
+          <img src="{% static trip.driver.image|cut:'main_app/static/' %}" width="120px" height="120px" alt="Driver Image">
+        </div>
+        <div style="margin-top: 20px;">
+            <p>{{ trip.car.name }}</p>
+            <img src="{% static trip.car.image|cut:'main_app/static/' %}" 
+                width="200px" height="120px" alt="Car Image">
+        </div>
+    </div>
+</div>
 
 <script src="{% static 'js/map.js' %}"></script>
 <script>
-  // make trip coordinates available to the JS
-  window._savedTrip = {
-    origin_lat: "{{ trip.origin_lat }}",
-    origin_lng: "{{ trip.origin_lng }}",
-    destination_lat: "{{ trip.destination_lat }}",
-    destination_lng: "{{ trip.destination_lng }}"
-  };
+    // make trip coordinates available to the JS
+    window._savedTrip = {
+        origin_lat: "{{ trip.origin_lat }}",
+        origin_lng: "{{ trip.origin_lng }}",
+        destination_lat: "{{ trip.destination_lat }}",
+        destination_lng: "{{ trip.destination_lng }}"
+    };
 </script>
 <script src="{% static 'js/map.js' %}" data-google-maps-api-key="{{ google_maps_api_key }}"></script>
 {% endblock %}
-

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Car List</h1>
+
+{% for trip in trips %}
+<div class="card">
+    <h3 style="color: maroon;">Trip {{ trip.id }}</h3>
+    <p style="color: black;">{{ trip.origin_address }} → {{ trip.destination_address }}</p>
+
+    <p style="color: black;">Distance: {{ trip.distance_text }} • Duration: {{ trip.duration_text }}</p>
+</div>
+{% empty %}
+<p>No Trips</p>
+{% endfor %}
+{% endblock %}

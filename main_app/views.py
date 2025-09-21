@@ -52,7 +52,8 @@ def about(request):
 @login_required
 def cars_index(request):
     #select all cars from the database (main_app_car)
-    cars = Car.objects.filter(user=request.user)
+    # cars = Car.objects.filter(user=request.user)
+    cars = Car.objects.all()
     return render(request, 'cars/index.html', {'cars': cars})
 
 @login_required
@@ -66,11 +67,20 @@ def cars_detail(request, car_id):
                 'drivers': drivers_car_doesnt_have
                 })
 
+@login_required
+def user_trips(request):
+    trips = Trip.objects.filter(user=request.user)
+    return render(request, 'cars/user_trips.html', {'trips': trips})
+
+@login_required
+def all_trips(request):
+    trips = Trip.objects.all()
+    return render(request, 'cars/all_trips.html', {'trips': trips})
 
 def add_trip(request, car_id):
     form = TripForm(request.POST)
     car = Car.objects.get(id=car_id)
-    user = user.object.get(id=user_id)
+    # user = user.object.get(id=user_id)
     
 
     if form.is_valid():

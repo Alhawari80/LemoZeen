@@ -2,20 +2,21 @@
 {% block content %}
 <h1>Drivers List</h1>
 {% for driver in driver_list %}
-  <a href="{% url 'drivers_detail' driver.id %}">
-    <div class="card">
-      <div class="card-content">
-        <div class="flex-container">
-            <span class="card-title">{{ driver.name }}</span>
-           {% if driver.image %}
-         {% load static %}
-<img src="{% static driver.image|cut:'main_app/static/' %}" 
-width="100px" height="100px" alt="Driver Image">  
+<a href="{% url 'drivers_detail' driver.id %}">
+  <div class="card" style="max-width: 300px; flex: 1; text-align: center; padding: 20px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px; background-color: lightslategray;">
+    <div class="card-content">
+      <div class="flex-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;"></div>
+        <span class="card-title">{{ driver.name }}</span>
+        {% if driver.image %}
+        {% load static %}
+        <img src="{% static driver.image|cut:'main_app/static/' %}" width="100px" height="100px" alt="Driver Image">
       </div>
-{% endif %}
+      {% endif %}
 
-        </div>
     </div>
-  </a>
+  </div>
+</a>
 {% endfor %}
 {% endblock %}

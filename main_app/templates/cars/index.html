@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>Car List</h1>
-  
+<h1>Car List</h1>
+<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px;">
   {% for car in cars %}
-    <div class="card">
-    <a href="{% url 'detail' car.id %}">
+  <div class="card" style="max-width: 300px; flex: 1; text-align: center; padding: 20px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px; background-color: lightslategray;">
+    <a href="{% url 'detail' car.id %}" style="text-decoration: none; color: inherit;">
       <div class="card-content">
-        <div class="flex-container">
-            <div>
-              <span class="card-title">{{ car.name }}</span>
-              <!-- <p>Model: {{ car.model }}</p> -->
-              <p>Plate Number: {{ car.plate_number }}</p>
-            </div>
-            <div>
-                {% load static %}
-                <img src="{% static car.image|cut:'main_app/static/' %}" 
-                width="100px" height="100px" alt="Car Image">
-            </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="text-align: left;">
+            <span class="card-title" style="color:maroon; font-size: 1.5rem; font-weight: bold;">{{ car.name }}</span>
+            <p style="color: black; font-weight: bold;">Plate Number: {{ car.plate_number }}</p>
+          </div>
+          <div>
+            {% load static %}
+            <img src="{% static car.image|cut:'main_app/static/' %}" width="100" height="100" alt="Car Image"
+              style="border-radius: 8px;">
+          </div>
+        </div>
       </div>
-    </div>
     </a>
   </div>
   {% endfor %}
+</div>
+
+
 {% endblock %}

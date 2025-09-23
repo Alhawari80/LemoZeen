@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Drivers List</h1>
 <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px;">
-   {% for driver in driver_list %}
+  {% for driver in driver_list %}
   <div class="card" style="max-width: 300px; flex: 1; text-align: center; padding: 20px; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px; background-color: lightslategray;">
     <a href="{% url 'drivers_detail' driver.id %}" style="text-decoration: none; color: inherit;">

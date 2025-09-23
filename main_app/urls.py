@@ -19,17 +19,19 @@ urlpatterns = [
     path("trips/create/", views.create_trip, name="create_trip"),
     path("trips/<int:trip_id>/", views.trip_detail, name="trip_detail"),
     path("trip/create/", views.create_trip, name="create_trip"),
-    path("trip/<int:pk>/", views.trip_detail, name="trip_detail"),
+    # path("trip/<int:pk>/", views.trip_detail, name="trip_detail"),
+    
+    
+    path("trips/<int:pk>/update", views.TripUpdate.as_view(), name="trip_update"),
+    path("trips/<int:pk>/delete", views.TripDelete.as_view(), name="trip_delete"),
+    
+    
     # CBV's fpt drivers Model
     path("drivers/", views.DriverList.as_view(), name="drivers_index"),
     path("drivers/<int:pk>/", views.DriverDetail.as_view(), name="drivers_detail"),
     path("drivers/create/", views.DriverCreate.as_view(), name="drivers_create"),
-    path(
-        "drivers/<int:pk>/update/", views.DriverUpdate.as_view(), name="drivers_update"
-    ),
-    path(
-        "drivers/<int:pk>/delete/", views.DriverDelete.as_view(), name="drivers_delete"
-    ),
+    path("drivers/<int:pk>/update/", views.DriverUpdate.as_view(), name="drivers_update"),
+    path("drivers/<int:pk>/delete/", views.DriverDelete.as_view(), name="drivers_delete"),
     # Associate a Driver with a car (M:M)
     path(
         "cars/<int:car_id>/assoc_driver/<int:driver_id>/",
@@ -48,4 +50,4 @@ urlpatterns = [
     path("profile/", profile, name="users-profile"),
 ]
 
-# router.get('/', controller.index)
+

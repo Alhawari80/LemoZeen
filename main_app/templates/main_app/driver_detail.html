@@ -3,12 +3,12 @@
 <h1>Driver's Details</h1>
 <div class="row">
   <div class="col s6 col-offset-3">
-    <div class="card" style="max-width: 500px; flex: 1; text-align: center; padding: 20px; 
+    <div class="card" style="color:black ; font-size:x-large; font-style: initial; font-weight: bold ;max-width: 500px; flex: 1; 
+    text-align: center; padding: 30px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 10px; background-color: lightslategray;">
       <div class="card-content">
         <div class="flex-container">
           <span class="card-title">{{ driver.name }}</span>
-          <!-- <p>License Number: {{ driver.license_number }}</p> -->
           {% load static %}
           <img src="{% static driver.image|cut:'main_app/static/' %}" width="300px" height="300px" alt="Driver Image">
         </div>

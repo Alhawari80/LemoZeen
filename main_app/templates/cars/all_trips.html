@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Car List</h1>
+<h1>Trips List</h1>
 <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px;">
-{% for trip in trips %}
-<div class="card" style="min-width: 30%; min-height: 200px; flex: 1; text-align: center; padding: 20px; 
+    {% for trip in trips %}
+
+    <a href="{% url 'trip_detail' trip.id %}" style="text-decoration: none; color: inherit;">
+    <div class="card" style=" font-size: large; font-weight: bold;min-width: 30%; min-height: 200px; flex: 1; text-align: center; padding: 20px; 
     box-shadow: 0 4px 10px rgba(180, 28, 28, 0.1); border-radius: 10px; background-color: lightslategray;">
-    <div class="card-content">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-direction: row;">
-            <h3 style="color: maroon;">Trip {{ trip.id }}</h3>
-            <p style="color: black; ">{{ trip.origin_address }} → {{ trip.destination_address }}</p>
-            <p style="color: black;">Distance: {{ trip.distance_text }} • Duration: {{ trip.duration_text }}</p>
+        <div class="card-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-direction: row;">
+                <span>
+                <h3 style="color: maroon;">Trip {{ trip.id }}</h3>
+                <p style="color: black; ">{{ trip.origin_address }} → {{ trip.destination_address }}</p>
+                <p style="color: black;">Distance: {{ trip.distance_text }} • Duration: {{ trip.duration_text }}</p>
+                <p style="color: rgb(132, 32, 32);">Status: {{ trip.trip_status }}  </p> 
+                <p style="color: rgb(132, 32, 32);">Notification: {{ trip.trip_notification }}  </p>   
+            </span>
+            </div>
         </div>
     </div>
-</div>
-        {% empty %}
-        <p>No Trips</p>
-        {% endfor %}
+</a>
+    {% empty %}
+    <p>No Trips</p>
+    {% endfor %}
 </div>
 
 {% endblock %}

@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block content %}
-<h3>Trip {{ trip.id }}</h3>
+<h3>Trip {{ trip.id }} - Status: {{ trip.trip_status|capfirst }} - Notification {{ trip.trip_notification|capfirst }}</h3>
+
 <p>{{ trip.origin_address }} → {{ trip.destination_address }}</p>
 
 <p>Distance: {{ trip.distance_text }} • Duration: {{ trip.duration_text }}</p>
@@ -12,15 +13,20 @@
         <div id="map" style="width:100%; height:480px; max-width:900px;"></div>
 
     </div>
-    <div class="card" style="flex: 1; background-color: gray; max-width: 400px;">
-        <div style="margin-top: 20px;">
-            <p>{{ trip.driver.name }}</p>
-          <img src="{% static trip.driver.image|cut:'main_app/static/' %}" width="120px" height="120px" alt="Driver Image">
+    <div class="card"
+        style="flex: 1; background-color: #cfd1d2; max-width: 400px; justify-content: center; align-items: center;">
+        <div style="margin-top: 20px; text-align: center; ">
+            <p style="color: maroon; font-weight: bold; font-size: x-large;">{{ trip.driver.name|upper }}</p>
+            <img src="{% static trip.driver.image|cut:'main_app/static/' %}" width="120px" height="120px"
+                alt="Driver Image">
         </div>
-        <div style="margin-top: 20px;">
-            <p>{{ trip.car.name }}</p>
-            <img src="{% static trip.car.image|cut:'main_app/static/' %}" 
-                width="200px" height="120px" alt="Car Image">
+        <div style="margin-top: 20px; text-align: center; ">
+            <p style="color: maroon; font-weight: bold; font-size: x-large;">{{ trip.car.name|upper }}</p>
+            <img src="{% static trip.car.image|cut:'main_app/static/' %}" width="200px" height="120px" alt="Car Image">
+        </div>
+        <div class="card-action" style="margin-top: 10px;">
+            <a class="btn btn-primary" href="{% url 'trip_update' trip.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'trip_delete' trip.id %}">Delete</a>
         </div>
     </div>
 </div>

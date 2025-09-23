@@ -3,6 +3,7 @@
 
 {% block content %}
 <h4>Book: {{ car.name }}</h4>
+<div style="display: flex; justify-content: center; align-items: center;">
 <form method="post" action="{% url 'create_trip' %}" id="trip-form">
   {% csrf_token %}
   <input type="hidden" name="car_id" value="{{ car.id }}">
@@ -13,15 +14,13 @@
   <label for="destination-input">Destination</label><br>
   <input id="destination-input" name="destination_address" type="text" placeholder="Where to?" required style="width:100%; max-width:600px;"><br><br>
 
-  <label for="driver-select">Choose driver (optional)</label><br>
+  <label for="driver-select">Choose driver</label><br>
   <select name="driver_id" id="driver-select">
     <option value="">— choose driver —</option>
     {% for d in drivers %}
       <option value="{{ d.id }}">{{ d.name }}</option>
     {% endfor %}
   </select>
-
-  <!-- hidden lat/lng and route data (filled by JS) -->
   <input type="hidden" id="origin-lat" name="origin_lat">
   <input type="hidden" id="origin-lng" name="origin_lng">
   <input type="hidden" id="destination-lat" name="destination_lat">
@@ -33,10 +32,10 @@
   <button type="button" id="get-route" class="btn btn-danger">Show route</button>
   <button type="submit" class="btn btn-danger">Confirm booking</button>
 </form>
-
+</div>
 <hr>
+<div style="display: flex; justify-content: center; align-items: center;">
 <div id="map" style="width:50%; height:480px; max-width:900px;"></div>
-
-<!-- 1. Load our map.js (defines window.initMap) -->
+</div>
 <script defer src="{% static 'js/map.js' %}" data-google-maps-api-key="{{ google_maps_api_key }}"></script>
 {% endblock %}

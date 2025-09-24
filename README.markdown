@@ -42,6 +42,13 @@ LemoZeen is a web-based application inspired by Uber, enabling users to select a
 
 Note: Ensure you have a Google Maps API key configured in the settings.
 
+## Future Enhancements:
+- Payment Gateway.
+- Live Location to track the trip.
+- Alerts to let the user aware of his ride's arrival.
+- Launching on a server.
+- Mobile app.
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.

@@ -20,44 +20,18 @@ LemoZeen is a web-based application inspired by Uber, enabling users to select a
 - **Database**: SQL for persistent storage of users, trips, cars, and drivers.
 - **APIs**: Google Maps API for geolocation, mapping, and routing.
 
-## Screenshots
+## Project Dependencies
 
-### Login Page
-![Login Page](path/to/login-page.png)
 
-### User Page
-![User Page](path/to/user-page.png)
+- ERD ![ERD](main_app/static/images/LemoZeen-ERD.png)
 
-### Driver Page
-![Driver Page](path/to/driver-page.png)
+- [Trello](https://trello.com/invite/b/68c09de14570afde43b0c56c/ATTIe961f007c84219a1c47cf360b7b6abe2101A58FD/lemozeen)
 
-### Admin Page
-![Admin Page](path/to/admin-page.png)
 
-### Add Car Page
-![Add Car Page](path/to/add-car-page.png)
 
-### Add Driver Page
-![Add Driver Page](path/to/add-driver-page.png)
+### Main Page
+![Main Page](main_app/static/images/welcom-page.png)
 
-### All Cars Page
-![All Cars Page](path/to/all-cars-page.png)
-
-### All Drivers Page
-![All Drivers Page](path/to/all-drivers-page.png)
-
-### Book Trip Page
-![Book Trip Page](path/to/book-trip-page.png)
-
-### Confirmed Trip Page
-![Confirmed Trip Page](path/to/confirmed-trip-page.png)
-
-### All Trips Page
-![All Trips Page](path/to/all-trips-page.png)
-
-## Live Demo
-
-[Live Demo](https://your-deployment-link.com)
 
 ## Installation
 
@@ -72,6 +46,3 @@ Note: Ensure you have a Google Maps API key configured in the settings.
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-## License
-
-This project is licensed under the MIT License.
